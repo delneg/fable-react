@@ -3,7 +3,7 @@ var webpack = require('webpack');
 const execSync = require("child_process").execSync;
 
 var CONFIG = {
-    fsharpEntry: './src/Client/Client.fsproj',
+    fsharpEntry: './src/Client/Client.fs.js',
     outputDir: './src/Client/public',
     assetsDir: './src/Client',
     devServerPort: 8080,
@@ -12,17 +12,17 @@ var CONFIG = {
           target: 'http://localhost:8085',
         }
     },
-    // Use babel-preset-env to generate JS compatible with most-used browsers.
-    // More info at https://babeljs.io/docs/en/next/babel-preset-env.html
-    babel: {
-        presets: [
-            ['@babel/preset-env', {
-                modules: false,
-                useBuiltIns: 'usage',
-                corejs: 3
-            }]
-        ],
-    }
+    // // Use babel-preset-env to generate JS compatible with most-used browsers.
+    // // More info at https://babeljs.io/docs/en/next/babel-preset-env.html
+    // babel: {
+    //     presets: [
+    //         ['@babel/preset-env', {
+    //             modules: false,
+    //             useBuiltIns: 'usage',
+    //             corejs: 3
+    //         }]
+    //     ],
+    // }
 }
 
 // If we're running the webpack-dev-server, assume we're in development mode
@@ -60,19 +60,6 @@ module.exports = {
         proxy: CONFIG.devServerProxy,
         hot: true,
         inline: true
-    },
-    module: {
-        rules: [
-            {
-                test: /\.fs(x|proj)?$/,
-                use: {
-                    loader: 'fable-loader',
-                    options: {
-                        babel: CONFIG.babel
-                    }
-                }
-            },
-        ]
     }
 };
 
