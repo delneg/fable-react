@@ -1,9 +1,9 @@
-const cluster = require('cluster');
-const http = require('http');
-const View = require('../src/Client/bin/lib/View')
-const ReactDOMServer = require('react-dom/server')
-const os = require('os')
-const coreCount = os.cpus().length;
+import cluster from 'cluster';
+import 'http';
+import {view} from '../src/Shared/View.fs.js'
+import ReactDOMServer from 'react-dom/server.node.js';
+import {cpus} from 'os'
+const coreCount = cpus().length;
 
 const initState = {
   counter: 42,
@@ -20,7 +20,7 @@ const totalTimes = workerTimes * coreCount
 function render(len = workerTimes) {
   const start = Date.now()
   while (len--) {
-    ReactDOMServer.renderToString(View.view(initState, noop))
+    ReactDOMServer.renderToString(view(initState, noop))
   }
   return Date.now() - start
 }
@@ -28,7 +28,7 @@ function render(len = workerTimes) {
 function singleTest() {
   const times = totalTimes
   const time = render(times)
-  console.log(`[Single process] ${time}ms    ${(times / time * 1000).toFixed(3)}req/s`)
+  console.log(`[Single process] ${time}ms   render ${times} times  ${(times / time * 1000).toFixed(3)}req/s`)
 }
 
 if (cluster.isMaster) {

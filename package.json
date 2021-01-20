@@ -1,5 +1,6 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "fable build.fsx --run",
     "todomvc-start": "webpack-dev-server --config Samples/TodoMVC/webpack.config.js",
