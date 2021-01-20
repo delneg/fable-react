@@ -267,51 +267,85 @@ cd ./Samples/SSRSample
 
 ```
 
-Here is the benchmark result on a linux laptop (Intel Core i7-3630QM, 8 core), rendering on dotnet core is about ~1.5x faster then on nodejs in a single thread. To take the advantage of multi-core systems, we also tested with multi-thread on dotnet core and cluster mode in nodejs, the dotnet core version is still faster then nodejs version, but not much. I guess it's because multi-process takes more advantages from multi cores then multi-threaded. What's more, multi-threaded dotnet has less memory footprint.
-
+Updated benchmark (MacBookPro 2019 w/ Core i9 2.4 GHz), .net5.0 & node.js 14.4.0
 ```sh
 
-dotnet ./bin/Release/netcoreapp2.0/dotnet.dll
+dotnet ./bin/Release/net5.0/dotnet.dll
 Thread 1 started
-Thread 1 render 160000 times used 23062ms
-[Single thread] 23062ms    6937.820req/s
+Thread 1 render 320000 times used 70954ms
+[Single thread] 70954ms    4509.964req/s
 Thread 1 started
-Thread 3 started
 Thread 4 started
-Thread 6 started
 Thread 5 started
+Thread 6 started
 Thread 7 started
-Thread 10 started
+Thread 8 started
 Thread 9 started
-Thread 3 render 20000 times used 9593ms
-Thread 5 render 20000 times used 9689ms
-Thread 10 render 20000 times used 9693ms
-Thread 9 render 20000 times used 9705ms
-Thread 4 render 20000 times used 9720ms
-Thread 1 render 20000 times used 9753ms
-Thread 7 render 20000 times used 9757ms
-Thread 6 render 20000 times used 9795ms
-[8 tasks] Total: 9713ms    Memory footprint: 44.063MB   Requests/sec: 16472.768
+Thread 10 started
+Thread 12 started
+Thread 11 started
+Thread 13 started
+Thread 15 started
+Thread 14 started
+Thread Thread 17 started
+18 startedThread 
+19 started
+Thread 14 render 20000 times used 15288ms
+Thread 19 render 20000 times used 15372ms
+Thread 1 render 20000 times used 15478ms
+Thread 9 render 20000 times used 15485ms
+Thread 10 render 20000 times used 15527ms
+Thread 8 render 20000 times used 15566ms
+Thread 5 render 20000 times used 15578ms
+Thread 7 render 20000 times used 15581ms
+Thread 6 render 20000 times used 15594ms
+Thread 4 render 20000 times used 15605ms
+Thread 18 render 20000 times used 15611ms
+Thread 11 render 20000 times used 15618ms
+Thread 13 render 20000 times used 15623ms
+Thread 17 render 20000 times used 15646ms
+Thread 15 render 20000 times used 15656ms
+Thread 12 render 20000 times used 15685ms
+[16 tasks] Total: 15557ms    Memory footprint: 46.672MB   Requests/sec: 20569.519
+
+
 
 /usr/local/bin/node ./node.js
-Master 10891 is running
-[Single process] 34322ms    4661.733req/s
-Worker 10911: started
-Worker 10916: started
-Worker 10928: started
-Worker 10942: started
-Worker 10930: started
-Worker 10935: started
-Worker 10922: started
-Worker 10951: started
-Worker 10911: render 20000 times used 11394ms
-Worker 10935: render 20000 times used 11353ms
-Worker 10928: render 20000 times used 11522ms
-Worker 10922: render 20000 times used 11492ms
-Worker 10916: render 20000 times used 11812ms
-Worker 10930: render 20000 times used 11913ms
-Worker 10951: render 20000 times used 11781ms
-Worker 10942: render 20000 times used 12236ms
-[8 workers] Total: 11687.875ms    Memory footprint: 200.066MB    Requests/sec: 13689.400
+Master 32903 is running
+[Single process] 23541ms   render 320000 times  13593.305req/s
+Worker 32908: started
+Worker 32909: started
+Worker 32912: started
+Worker 32911: started
+Worker 32913: started
+Worker 32914: started
+Worker 32910: started
+Worker 32915: started
+Worker 32916: started
+Worker 32918: started
+Worker 32917: started
+Worker 32920: started
+Worker 32919: started
+Worker 32921: started
+Worker 32922: started
+Worker 32923: started
+Worker 32911: render 20000 times used 4127ms
+Worker 32916: render 20000 times used 4147ms
+Worker 32923: render 20000 times used 4125ms
+Worker 32917: render 20000 times used 4177ms
+Worker 32913: render 20000 times used 4194ms
+Worker 32909: render 20000 times used 4209ms
+Worker 32910: render 20000 times used 4196ms
+Worker 32920: render 20000 times used 4178ms
+Worker 32912: render 20000 times used 4211ms
+Worker 32915: render 20000 times used 4196ms
+Worker 32921: render 20000 times used 4164ms
+Worker 32914: render 20000 times used 4206ms
+Worker 32922: render 20000 times used 4169ms
+Worker 32919: render 20000 times used 4191ms
+Worker 32908: render 20000 times used 4232ms
+Worker 32918: render 20000 times used 4230ms
+[16 workers] Total: 4184.5ms    Memory footprint: 387.550MB    Requests/sec: 76472.697
+
 
 ```
